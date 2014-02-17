@@ -1,0 +1,31 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = "2"
+
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+ config.vm.provider :digital_ocean do |provider, override|
+    override.ssh.private_key_path = '~/.ssh/id_rsa'
+    override.vm.box = 'digital_ocean'
+    override.vm.box_url = "https://github.com/smdahlen/vagrant-digitalocean/raw/master/box/digital_ocean.box"
+    override.vm.hostname='cassandra01'
+
+    provider.client_id = 'DiM4NplqddalnQlgWmHWP'
+    provider.api_key = 'e4a4dd4b5110dce4abbaaec7039b4e2c'
+    provider.image = 'BaseImage'
+    provider.region = 'New York 2'
+    provider.size = '8GB'
+
+    override.ssh.port=2222
+    override.vm.provision "ansible" do |ansible|
+      ansible.verbose = 'vvvv'
+      ansible.playbook = 'bootstrap.yml'
+      ansible.host_key_checking = false
+      ansible.extra_vars = 'extra_vars.yml'
+    end    
+  end
+end
+
