@@ -16,4 +16,5 @@
     - packages
     - bootstrap
     - java
-#    - users
+    - netkernel
+
