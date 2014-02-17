@@ -2,11 +2,15 @@
 # Bootstrap compute instances into a standard base state
 
  - hosts: all
-   user:  root
+   user:  vagrant
 
    vars:
+    ansible_ssh_host: 127.0.0.1
     ansible_ssh_port: 2222
-    ansible_ssh_user: root
+    ansible_ssh_user: vagrant
+    fqdn: "nk01.netkernelroc.org"
+    ssh_port: 22
+
 
    roles:
     - packages

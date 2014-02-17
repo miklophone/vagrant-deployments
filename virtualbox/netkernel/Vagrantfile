@@ -11,7 +11,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ansible.verbose = 'vvvv'
     ansible.playbook = 'bootstrap.yml'
     ansible.host_key_checking = false
-    ansible.extra_vars = 'extra_vars.yml'
+    ansible.sudo=true
+#    ansible.extra_vars = 'extra_vars.yml'
   end  
   config.vm.provider "virtualbox" do |v|
     v.memory = 2048
