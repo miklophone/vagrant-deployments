@@ -1,4 +1,4 @@
-# Vagrant DigitalOcean support
+# Vagrant DigitalOcean NetKernel support
 
 This repository contains Ansible playbooks used to create Digital Ocean
-droplets with Vagrant.
+droplets with Vagrant that run NetKernel
