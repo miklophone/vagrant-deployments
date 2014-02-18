@@ -16,7 +16,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     provider.client_id = 'DiM4NplqddalnQlgWmHWP'
     provider.api_key = 'e4a4dd4b5110dce4abbaaec7039b4e2c'
     provider.image = 'BaseImage'
-    provider.region = 'New York 1'
+    provider.region = 'New York 2'
 
     override.ssh.port=2222
     override.vm.provision "ansible" do |ansible|
