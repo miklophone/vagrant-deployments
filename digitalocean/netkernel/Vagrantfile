@@ -20,7 +20,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     override.ssh.port=2222
     override.vm.provision "ansible" do |ansible|
-      ansible.verbose = 'vvvv'
+#      ansible.verbose = 'vvvv'
       ansible.playbook = 'bootstrap.yml'
       ansible.host_key_checking = false
       ansible.extra_vars = 'extra_vars.yml'
