@@ -1,0 +1,41 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = "2"
+INSTANCE_BASE_IP = 100
+INSTANCE_COUNT = 2
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+  config.vm.box = "ubuntu64"
+  #config.vm.box_url = "http://files.vagrantup.com/precise64.box"
+
+  (1..INSTANCE_COUNT).each do |id|
+    name = sprintf "cass%02d", id
+    ip = sprintf "192.168.9.%d", INSTANCE_BASE_IP + id
+
+    config.vm.define name do |box|
+      box.vm.hostname = name
+      box.vm.network :private_network, ip: ip
+      box.vm.network "forwarded_port", guest: 1060, host: 11060 + id
+      box.vm.network "forwarded_port", guest: 8080, host: 18000 + id
+      box.vm.network "forwarded_port", guest: 8088, host: 18800 + id
+      
+      box.vm.provision "ansible" do |ansible|
+        ansible.verbose = 'vvvv'
+        ansible.playbook = 'bootstrap.yml'
+        ansible.host_key_checking = false
+        ansible.sudo = true
+        ansible.extra_vars = {
+          fqdn: "#{name}.netkernelroc.org"
+        }
+      end  
+    end
+  end
+
+  config.vm.provider "virtualbox" do |v|
+    v.memory = 4096
+  end  
+
+end
