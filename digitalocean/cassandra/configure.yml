@@ -11,3 +11,6 @@
 
    roles:
     - vagrant
+    - packages
+    - java
+    - cassandra
