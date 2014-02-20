@@ -1,5 +1,5 @@
 ---
-# Bootstrap compute instances into a standard base state
+# Configure a compute instance to run Cassandra
 
  - hosts: all
    user:  root

@@ -1,5 +1,5 @@
 ---
-# Bootstrap compute instances into a standard base state
+# Configure a compute instance to run Cassandra
 
  - hosts: all
    user:  vagrant
@@ -10,10 +10,7 @@
     ansible_ssh_user: vagrant
     ssh_port: 22
 
-
    roles:
-    #- packages
-    - bootstrap
+    - packages
     - java
-    - netkernel
-
+    - cassandra
